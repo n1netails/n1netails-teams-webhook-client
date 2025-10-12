@@ -62,7 +62,7 @@ public class Example {
             TeamsWebhookClient client = new TeamsWebhookClientImpl(webhookService);
 
             WebhookMessage message = new WebhookMessage();
-            message.setText("Hello, from n1netails-teams-webhook-client!");
+            message.setContent("Hello, from n1netails-teams-webhook-client!");
 
             client.sendMessage("YOUR_WEBHOOK_URL", message);
         } catch (Exception e) {
