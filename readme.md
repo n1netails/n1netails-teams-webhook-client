@@ -11,14 +11,30 @@ N1ne Tails is an open-source project that provides practical alerts and monitori
 Use the N1ne Tails Teams Webhook Client to easily send webhook messages to a teams channel.
 
 ## How to set up a team and channels
+In order to use this webhook client you will need to have a Microsoft 365 Business account.
 
 ### Create teams webhook
 
-1. In Microsoft Teams, choose a channel and from the options menu (...) select **Connectors**.
-2. Search for **Incoming Webhook** and select **Add**.
-3. Select **Configure**, provide a name, and optionally upload an image for your webhook.
+1. In Microsoft Teams, choose a channel and from the options menu (...) select **Workflows**.
+2. Search for **Send webhook alerts to a channel** and select it.
+3. Provide a name for your new webhook select **Next**.
+4. In the details section select the **Microsoft Teams Team** and the **Microsoft Teams Channel** you want the webhook to be linked to select **Add Workflow**.
 4. The dialog will present a unique URL that maps to the channel. Copy this **webhook URL**.
 5. Your webhook is now ready to receive messages.
+
+### Editing a Webhook in Power Automate
+You can confirm your workflow is set up correctly by going to the channel where the workflow is installed.
+
+1. Click on **More Options** it will be three dots '...' next to the channel when you hover over it.
+2. Select **Workflows**.
+3. Click **Manage** in the bottom-left corner.
+4. Hover over your target webhook and select **More commands → Edit**.
+
+If configured correctly, it should look like the image below:
+
+<div align="center">
+  <img src="edit-webhook-workflow-setup.png" alt="N1ne Tails" width="500" style="display: block; margin: auto;"/>
+</div>
 
 ## Install
 Install the teams webhook client by adding the following dependency:

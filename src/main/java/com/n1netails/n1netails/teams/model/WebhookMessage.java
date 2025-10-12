@@ -11,8 +11,7 @@ import lombok.Setter;
 @Setter
 public class WebhookMessage {
 
-    private String channel;
-    private String text;
+    private String content;
 
     /**
      * Webhook Message Constructor
