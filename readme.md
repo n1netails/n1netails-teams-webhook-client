@@ -13,7 +13,12 @@ Use the N1ne Tails Teams Webhook Client to easily send webhook messages to a tea
 ## How to set up a team and channels
 
 ### Create teams webhook
-// todo document how to create a webhook using Workflows 'Send webhook alerts to a channel'
+
+1. In Microsoft Teams, choose a channel and from the options menu (...) select **Connectors**.
+2. Search for **Incoming Webhook** and select **Add**.
+3. Select **Configure**, provide a name, and optionally upload an image for your webhook.
+4. The dialog will present a unique URL that maps to the channel. Copy this **webhook URL**.
+5. Your webhook is now ready to receive messages.
 
 ## Install
 Install the teams webhook client by adding the following dependency:
@@ -26,7 +31,30 @@ Install the teams webhook client by adding the following dependency:
 ```
 
 ## Usage
-// todo provide information on how to use the library
+To send a message to your Teams channel, use the `TeamsWebhookClient`.
+
+```java
+import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
+import com.n1netails.n1netails.teams.internal.TeamsWebhookClientImpl;
+import com.n1netails.n1netails.teams.model.WebhookMessage;
+import com.n1netails.n1netails.teams.service.WebhookService;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            WebhookService webhookService = new WebhookService();
+            TeamsWebhookClient client = new TeamsWebhookClientImpl(webhookService);
+
+            WebhookMessage message = new WebhookMessage();
+            message.setText("Hello, from n1netails-teams-webhook-client!");
+
+            client.sendMessage("YOUR_WEBHOOK_URL", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 # Develop
 ## Build

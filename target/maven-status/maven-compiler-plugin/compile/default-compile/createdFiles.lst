@@ -1,0 +1,5 @@
+com/n1netails/n1netails/teams/service/WebhookService.class
+com/n1netails/n1netails/teams/internal/TeamsWebhookClientImpl.class
+com/n1netails/n1netails/teams/api/TeamsWebhookClient.class
+com/n1netails/n1netails/teams/exception/TeamsWebhookException.class
+com/n1netails/n1netails/teams/model/WebhookMessage.class
