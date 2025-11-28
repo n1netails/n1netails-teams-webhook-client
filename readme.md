@@ -1,4 +1,4 @@
-# N1ne Tails
+# N1netails
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png" alt="N1ne Tails" width="500" style="display: block; margin: auto;"/>
@@ -6,9 +6,14 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Stars](https://img.shields.io/github/stars/n1netails/n1netails-teams-webhook-client)
+![Issues](https://img.shields.io/github/issues/n1netails/n1netails-teams-webhook-client)
+![Contributors](https://img.shields.io/github/contributors/n1netails/n1netails-teams-webhook-client)
+![Last Commit](https://img.shields.io/github/last-commit/n1netails/n1netails-teams-webhook-client)
+
 # Teams Webhook Client
-N1ne Tails is an open-source project that provides practical alerts and monitoring for applications.
-Use the N1ne Tails Teams Webhook Client to easily send webhook messages to a teams channel.
+N1netails is an open-source project that provides practical alerts and monitoring for applications.
+Use the N1netails Teams Webhook Client to easily send webhook messages to a teams channel.
 
 ## How to set up a team and channels
 In order to use this webhook client you will need to have a Microsoft 365 Business account.
@@ -42,12 +47,19 @@ Install the teams webhook client by adding the following dependency:
 <dependency>
     <groupId>com.n1netails</groupId>
     <artifactId>n1netails-teams-webhook-client</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
+```
+
+Gradle (Groovy)
+```groovy
+implementation 'com.n1netails:n1netails-teams-webhook-client:0.2.0'
 ```
 
 ## Usage
 To send a message to your Teams channel, use the `TeamsWebhookClient`.
+
+### Simple Message
 
 ```java
 import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
@@ -71,6 +83,60 @@ public class Example {
     }
 }
 ```
+
+#### Example simple message output
+<div align="center">
+  <img src="teams-message-simple.png" alt="N1netails teams webhook message simple" width="500" style="display: block; margin: auto;"/>
+</div>
+
+### Message Card
+The message card is a more flexible and customizable way to send messages.
+```java
+import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
+import com.n1netails.n1netails.teams.internal.TeamsWebhookClientImpl;
+import com.n1netails.n1netails.teams.model.Fact;
+import com.n1netails.n1netails.teams.model.MessageCard;
+import com.n1netails.n1netails.teams.model.Section;
+import com.n1netails.n1netails.teams.service.WebhookService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            WebhookService webhookService = new WebhookService();
+            TeamsWebhookClient client = new TeamsWebhookClientImpl(webhookService);
+
+            MessageCard messageCard = new MessageCard();
+            messageCard.setTitle("Message Card Title");
+            messageCard.setSummary("Message Card Summary");
+
+            List<Section> sections = new ArrayList<>();
+            Section section = new Section();
+            section.setTitle("Section Title");
+
+            List<Fact> facts = new ArrayList<>();
+            facts.add(new Fact("Fact 1", "Fact 1 Value"));
+            facts.add(new Fact("Fact 2", "Fact 2 Value"));
+            section.setFacts(facts);
+            sections.add(section);
+
+            messageCard.setSections(sections);
+
+            client.sendMessage("YOUR_WEBHOOK_URL", messageCard);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Example message block output
+<div align="center">
+  <img src="teams-message-block.png" alt="N1netails teams webhook message block" width="500" style="display: block; margin: auto;"/>
+</div>
+
 
 # Develop
 ## Build

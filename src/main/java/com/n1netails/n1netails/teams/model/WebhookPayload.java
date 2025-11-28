@@ -78,6 +78,8 @@ public class WebhookPayload {
         private String text;
         private String weight;
         private String size;
+        private boolean wrap;
+        private boolean separator;
 
         /**
          * Body Item Constructor
