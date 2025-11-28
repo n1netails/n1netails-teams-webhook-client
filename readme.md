@@ -104,7 +104,6 @@ public class Example {
 
             MessageCard messageCard = new MessageCard();
             messageCard.setTitle("Message Card Title");
-            messageCard.setThemeColor("0076D7");
             messageCard.setSummary("Message Card Summary");
 
             List<Section> sections = new ArrayList<>();
