@@ -1,6 +1,7 @@
 package com.n1netails.n1netails.teams.api;
 
 import com.n1netails.n1netails.teams.exception.TeamsWebhookException;
+import com.n1netails.n1netails.teams.model.MessageCard;
 import com.n1netails.n1netails.teams.model.WebhookMessage;
 
 /**
@@ -16,4 +17,12 @@ public interface TeamsWebhookClient {
      * @throws TeamsWebhookException teams webhook exception
      */
     void sendMessage(String webhookUrl, WebhookMessage message) throws TeamsWebhookException;
+
+    /**
+     * Send teams webhook message
+     * @param webhookUrl teams webhook url
+     * @param messageCard teams message
+     * @throws TeamsWebhookException teams webhook exception
+     */
+    void sendMessage(String webhookUrl, MessageCard messageCard) throws TeamsWebhookException;
 }
