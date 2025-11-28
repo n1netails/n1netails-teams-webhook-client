@@ -6,6 +6,11 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Stars](https://img.shields.io/github/stars/n1netails/n1netails-teams-webhook-client)
+![Issues](https://img.shields.io/github/issues/n1netails/n1netails-teams-webhook-client)
+![Contributors](https://img.shields.io/github/contributors/n1netails/n1netails-teams-webhook-client)
+![Last Commit](https://img.shields.io/github/last-commit/n1netails/n1netails-teams-webhook-client)
+
 # Teams Webhook Client
 N1ne Tails is an open-source project that provides practical alerts and monitoring for applications.
 Use the N1ne Tails Teams Webhook Client to easily send webhook messages to a teams channel.
@@ -42,8 +47,13 @@ Install the teams webhook client by adding the following dependency:
 <dependency>
     <groupId>com.n1netails</groupId>
     <artifactId>n1netails-teams-webhook-client</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
+```
+
+Gradle (Groovy)
+```groovy
+implementation 'com.n1netails:n1netails-teams-webhook-client:0.2.0'
 ```
 
 ## Usage
