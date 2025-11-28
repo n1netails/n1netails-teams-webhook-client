@@ -1,4 +1,4 @@
-# N1ne Tails
+# N1netails
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png" alt="N1ne Tails" width="500" style="display: block; margin: auto;"/>
@@ -12,8 +12,8 @@
 ![Last Commit](https://img.shields.io/github/last-commit/n1netails/n1netails-teams-webhook-client)
 
 # Teams Webhook Client
-N1ne Tails is an open-source project that provides practical alerts and monitoring for applications.
-Use the N1ne Tails Teams Webhook Client to easily send webhook messages to a teams channel.
+N1netails is an open-source project that provides practical alerts and monitoring for applications.
+Use the N1netails Teams Webhook Client to easily send webhook messages to a teams channel.
 
 ## How to set up a team and channels
 In order to use this webhook client you will need to have a Microsoft 365 Business account.
