@@ -148,6 +148,7 @@ public class WebhookService {
             WebhookPayload.BodyItem summaryBlock = new WebhookPayload.BodyItem();
             summaryBlock.setType(TEXT_BLOCK);
             summaryBlock.setText(card.getSummary());
+            summaryBlock.setWrap(true);
             body.add(summaryBlock);
         }
 
@@ -161,6 +162,7 @@ public class WebhookService {
                     sectionTitle.setText(section.getTitle());
                     sectionTitle.setWeight(BOLDER);
                     sectionTitle.setSize(MEDIUM);
+                    sectionTitle.setSeparator(true);
                     body.add(sectionTitle);
                 }
 
@@ -169,6 +171,7 @@ public class WebhookService {
                         WebhookPayload.BodyItem factBlock = new WebhookPayload.BodyItem();
                         factBlock.setType(TEXT_BLOCK);
                         factBlock.setText(fact.getName() + ": " + fact.getValue());
+                        factBlock.setWrap(true);
                         body.add(factBlock);
                     }
                 }
