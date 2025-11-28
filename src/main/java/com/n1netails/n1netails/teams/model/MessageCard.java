@@ -16,7 +16,6 @@ public class MessageCard {
     @SerializedName("@type")
     private String type = "MessageCard";
     private String title;
-    private String themeColor;
     private String summary;
     private List<Section> sections;
 
