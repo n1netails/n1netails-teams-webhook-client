@@ -60,6 +60,7 @@ implementation 'com.n1netails:n1netails-teams-webhook-client:0.2.0'
 To send a message to your Teams channel, use the `TeamsWebhookClient`.
 
 ### Simple Message
+
 ```java
 import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
 import com.n1netails.n1netails.teams.internal.TeamsWebhookClientImpl;
@@ -82,6 +83,11 @@ public class Example {
     }
 }
 ```
+
+#### Example simple message output
+<div align="center">
+  <img src="teams-message-simple.png" alt="N1netails teams webhook message simple" width="500" style="display: block; margin: auto;"/>
+</div>
 
 ### Message Card
 The message card is a more flexible and customizable way to send messages.
@@ -125,6 +131,12 @@ public class Example {
     }
 }
 ```
+
+#### Example message block output
+<div align="center">
+  <img src="teams-message-block.png" alt="N1netails teams webhook message block" width="500" style="display: block; margin: auto;"/>
+</div>
+
 
 # Develop
 ## Build
