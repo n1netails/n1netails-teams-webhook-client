@@ -45,6 +45,7 @@ public class WebhookPayload {
         private String type;
         private String version;
         private List<BodyItem> body;
+        private List<ActionItem> actions;
 
         /**
          * Content Constructor
@@ -80,10 +81,43 @@ public class WebhookPayload {
         private String size;
         private boolean wrap;
         private boolean separator;
+        private String url;
+        private List<MediaSource> sources;
 
         /**
          * Body Item Constructor
          */
         public BodyItem() {}
+    }
+
+    /**
+     * Media Source
+     */
+    @Setter
+    @Getter
+    public static class MediaSource {
+        private String mimeType;
+        private String url;
+
+        /**
+         * Media Source Constructor
+         */
+        public MediaSource() {}
+    }
+
+    /**
+     * Action Item
+     */
+    @Setter
+    @Getter
+    public static class ActionItem {
+        private String type;
+        private String title;
+        private String url;
+
+        /**
+         * Action Item Constructor
+         */
+        public ActionItem() {}
     }
 }

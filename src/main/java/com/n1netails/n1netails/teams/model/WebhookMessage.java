@@ -12,6 +12,8 @@ import lombok.Setter;
 public class WebhookMessage {
 
     private String content;
+    private String imageUrl;
+    private String videoUrl;
 
     /**
      * Webhook Message Constructor

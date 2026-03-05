@@ -25,6 +25,9 @@ public class WebhookService {
     public static final String TEXT_BLOCK = "TextBlock";
     public static final String BOLDER = "Bolder";
     public static final String MEDIUM = "Medium";
+    public static final String IMAGE = "Image";
+    public static final String MEDIA = "Media";
+    public static final String ACTION_OPEN_URL = "Action.OpenUrl";
 
     private final Gson gson = new Gson();
 
@@ -80,7 +83,7 @@ public class WebhookService {
         }
     }
 
-    private static WebhookPayload getWebhookPayload(WebhookMessage message) {
+    public static WebhookPayload getWebhookPayload(WebhookMessage message) {
         WebhookPayload payload = new WebhookPayload();
         WebhookPayload.Attachment attachment = new WebhookPayload.Attachment();
         attachment.setContentType(APPLICATION_VND_MICROSOFT_CARD_ADAPTIVE);
@@ -99,13 +102,33 @@ public class WebhookService {
         content.set$schema(HTTP_ADAPTIVECARDS_IO_SCHEMAS_ADAPTIVE_CARD_JSON);
         content.setType(ADAPTIVE_CARD);
         content.setVersion(VERSION);
-        WebhookPayload.BodyItem bodyItem = new WebhookPayload.BodyItem();
-        bodyItem.setType(TEXT_BLOCK);
-        bodyItem.setText(message.getContent());
-        bodyItem.setWeight(BOLDER);
-        bodyItem.setSize(MEDIUM);
         List<WebhookPayload.BodyItem> bodyItems = new ArrayList<>();
-        bodyItems.add(bodyItem);
+
+        if (message.getContent() != null) {
+            WebhookPayload.BodyItem bodyItem = new WebhookPayload.BodyItem();
+            bodyItem.setType(TEXT_BLOCK);
+            bodyItem.setText(message.getContent());
+            bodyItem.setWeight(BOLDER);
+            bodyItem.setSize(MEDIUM);
+            bodyItems.add(bodyItem);
+        }
+
+        if (message.getImageUrl() != null) {
+            WebhookPayload.BodyItem imageItem = new WebhookPayload.BodyItem();
+            imageItem.setType(IMAGE);
+            imageItem.setUrl(message.getImageUrl());
+            bodyItems.add(imageItem);
+        }
+
+        if (message.getVideoUrl() != null) {
+            WebhookPayload.BodyItem mediaItem = new WebhookPayload.BodyItem();
+            mediaItem.setType(MEDIA);
+            WebhookPayload.MediaSource source = new WebhookPayload.MediaSource();
+            source.setUrl(message.getVideoUrl());
+            mediaItem.setSources(Collections.singletonList(source));
+            bodyItems.add(mediaItem);
+        }
+
         content.setBody(bodyItems);
         return content;
     }
@@ -175,7 +198,35 @@ public class WebhookService {
                         body.add(factBlock);
                     }
                 }
+
+                if (section.getImageUrl() != null) {
+                    WebhookPayload.BodyItem imageItem = new WebhookPayload.BodyItem();
+                    imageItem.setType(IMAGE);
+                    imageItem.setUrl(section.getImageUrl());
+                    body.add(imageItem);
+                }
+
+                if (section.getVideoUrl() != null) {
+                    WebhookPayload.BodyItem mediaItem = new WebhookPayload.BodyItem();
+                    mediaItem.setType(MEDIA);
+                    WebhookPayload.MediaSource source = new WebhookPayload.MediaSource();
+                    source.setUrl(section.getVideoUrl());
+                    mediaItem.setSources(Collections.singletonList(source));
+                    body.add(mediaItem);
+                }
             }
+        }
+
+        if (card.getActions() != null) {
+            List<WebhookPayload.ActionItem> actions = new ArrayList<>();
+            for (Action action : card.getActions()) {
+                WebhookPayload.ActionItem actionItem = new WebhookPayload.ActionItem();
+                actionItem.setType(ACTION_OPEN_URL);
+                actionItem.setTitle(action.getName());
+                actionItem.setUrl(action.getTarget());
+                actions.add(actionItem);
+            }
+            content.setActions(actions);
         }
 
         content.setBody(body);

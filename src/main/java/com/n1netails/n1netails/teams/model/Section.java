@@ -14,6 +14,8 @@ public class Section {
 
     private String title;
     private List<Fact> facts;
+    private String imageUrl;
+    private String videoUrl;
 
     /**
      * Section Constructor

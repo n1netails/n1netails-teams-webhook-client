@@ -18,6 +18,7 @@ public class MessageCard {
     private String title;
     private String summary;
     private List<Section> sections;
+    private List<Action> actions;
 
     /**
      * Message Card Constructor
