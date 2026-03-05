@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WebhookServiceTest {
 
-    private final Gson gson = new Gson();
-
     @Test
     public void testGetWebhookPayloadFromWebhookMessage() {
         WebhookMessage message = new WebhookMessage();
