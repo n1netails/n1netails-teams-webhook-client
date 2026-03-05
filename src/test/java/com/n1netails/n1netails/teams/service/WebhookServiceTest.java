@@ -17,6 +17,7 @@ public class WebhookServiceTest {
         message.setContent("Test Content");
         message.setImageUrl("http://example.com/image.png");
         message.setVideoUrl("http://example.com/video.mp4");
+        message.setActions(Collections.singletonList(new Action("Action", "http://example.com")));
 
         WebhookPayload payload = WebhookService.getWebhookPayload(message);
 
@@ -45,6 +46,10 @@ public class WebhookServiceTest {
         assertNotNull(mediaItem.getSources());
         assertEquals(1, mediaItem.getSources().size());
         assertEquals("http://example.com/video.mp4", mediaItem.getSources().get(0).getUrl());
+
+        assertNotNull(content.getActions());
+        assertEquals(1, content.getActions().size());
+        assertEquals("Action", content.getActions().get(0).getTitle());
     }
 
     @Test

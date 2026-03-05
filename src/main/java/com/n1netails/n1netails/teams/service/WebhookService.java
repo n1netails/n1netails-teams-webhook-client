@@ -129,6 +129,18 @@ public class WebhookService {
             bodyItems.add(mediaItem);
         }
 
+        if (message.getActions() != null) {
+            List<WebhookPayload.ActionItem> actions = new ArrayList<>();
+            for (Action action : message.getActions()) {
+                WebhookPayload.ActionItem actionItem = new WebhookPayload.ActionItem();
+                actionItem.setType(ACTION_OPEN_URL);
+                actionItem.setTitle(action.getName());
+                actionItem.setUrl(action.getTarget());
+                actions.add(actionItem);
+            }
+            content.setActions(actions);
+        }
+
         content.setBody(bodyItems);
         return content;
     }
