@@ -18,13 +18,55 @@ import java.util.List;
  */
 public class WebhookService {
 
+    /**
+     * Media type for Microsoft Adaptive Cards.
+     */
     public static final String APPLICATION_VND_MICROSOFT_CARD_ADAPTIVE = "application/vnd.microsoft.card.adaptive";
+
+    /**
+     * HTTP Adaptive card IO Schemas Adaptive card JSON
+     */
     public static final String HTTP_ADAPTIVECARDS_IO_SCHEMAS_ADAPTIVE_CARD_JSON = "http://adaptivecards.io/schemas/adaptive-card.json";
+
+    /**
+     * Adaptive Card schema URL.
+     */
     public static final String ADAPTIVE_CARD = "AdaptiveCard";
+
+    /**
+     * Content version
+     */
     public static final String VERSION = "1.4";
+
+    /**
+     * Text block
+     */
     public static final String TEXT_BLOCK = "TextBlock";
+
+    /**
+     * Bolder
+     */
     public static final String BOLDER = "Bolder";
+
+    /**
+     * Medium
+     */
     public static final String MEDIUM = "Medium";
+
+    /**
+     * Image
+     */
+    public static final String IMAGE = "Image";
+
+    /**
+     * Media
+     */
+    public static final String MEDIA = "Media";
+
+    /**
+     * Action Open URL.
+     */
+    public static final String ACTION_OPEN_URL = "Action.OpenUrl";
 
     private final Gson gson = new Gson();
 
@@ -80,7 +122,12 @@ public class WebhookService {
         }
     }
 
-    private static WebhookPayload getWebhookPayload(WebhookMessage message) {
+    /**
+     * Generates a webhook payload from a webhook message.
+     * @param message webhook message
+     * @return the webhook payload
+     */
+    public static WebhookPayload getWebhookPayload(WebhookMessage message) {
         WebhookPayload payload = new WebhookPayload();
         WebhookPayload.Attachment attachment = new WebhookPayload.Attachment();
         attachment.setContentType(APPLICATION_VND_MICROSOFT_CARD_ADAPTIVE);
@@ -99,17 +146,46 @@ public class WebhookService {
         content.set$schema(HTTP_ADAPTIVECARDS_IO_SCHEMAS_ADAPTIVE_CARD_JSON);
         content.setType(ADAPTIVE_CARD);
         content.setVersion(VERSION);
-        WebhookPayload.BodyItem bodyItem = new WebhookPayload.BodyItem();
-        bodyItem.setType(TEXT_BLOCK);
-        bodyItem.setText(message.getContent());
-        bodyItem.setWeight(BOLDER);
-        bodyItem.setSize(MEDIUM);
         List<WebhookPayload.BodyItem> bodyItems = new ArrayList<>();
-        bodyItems.add(bodyItem);
+
+        if (message.getContent() != null) {
+            WebhookPayload.BodyItem bodyItem = new WebhookPayload.BodyItem();
+            bodyItem.setType(TEXT_BLOCK);
+            bodyItem.setText(message.getContent());
+            bodyItem.setWeight(BOLDER);
+            bodyItem.setSize(MEDIUM);
+            bodyItems.add(bodyItem);
+        }
+
+        if (message.getImageUrl() != null) {
+            WebhookPayload.BodyItem imageItem = new WebhookPayload.BodyItem();
+            imageItem.setType(IMAGE);
+            imageItem.setUrl(message.getImageUrl());
+            bodyItems.add(imageItem);
+        }
+
+        if (message.getActions() != null) {
+            List<WebhookPayload.ActionItem> actions = new ArrayList<>();
+            for (Action action : message.getActions()) {
+                WebhookPayload.ActionItem actionItem = new WebhookPayload.ActionItem();
+                actionItem.setType(ACTION_OPEN_URL);
+                actionItem.setTitle(action.getName());
+                actionItem.setUrl(action.getTarget());
+                actions.add(actionItem);
+            }
+            content.setActions(actions);
+        }
+
         content.setBody(bodyItems);
         return content;
     }
 
+    /**
+     * Generates a webhook payload from a message card.
+     *
+     * @param card the message card
+     * @return the webhook payload
+     */
     public static WebhookPayload getWebhookPayload(MessageCard card) {
         WebhookPayload payload = new WebhookPayload();
 
@@ -175,7 +251,26 @@ public class WebhookService {
                         body.add(factBlock);
                     }
                 }
+
+                if (section.getImageUrl() != null) {
+                    WebhookPayload.BodyItem imageItem = new WebhookPayload.BodyItem();
+                    imageItem.setType(IMAGE);
+                    imageItem.setUrl(section.getImageUrl());
+                    body.add(imageItem);
+                }
             }
+        }
+
+        if (card.getActions() != null) {
+            List<WebhookPayload.ActionItem> actions = new ArrayList<>();
+            for (Action action : card.getActions()) {
+                WebhookPayload.ActionItem actionItem = new WebhookPayload.ActionItem();
+                actionItem.setType(ACTION_OPEN_URL);
+                actionItem.setTitle(action.getName());
+                actionItem.setUrl(action.getTarget());
+                actions.add(actionItem);
+            }
+            content.setActions(actions);
         }
 
         content.setBody(body);
