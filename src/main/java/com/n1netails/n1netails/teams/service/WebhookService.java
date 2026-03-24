@@ -120,15 +120,6 @@ public class WebhookService {
             bodyItems.add(imageItem);
         }
 
-        if (message.getVideoUrl() != null) {
-            WebhookPayload.BodyItem mediaItem = new WebhookPayload.BodyItem();
-            mediaItem.setType(MEDIA);
-            WebhookPayload.MediaSource source = new WebhookPayload.MediaSource();
-            source.setUrl(message.getVideoUrl());
-            mediaItem.setSources(Collections.singletonList(source));
-            bodyItems.add(mediaItem);
-        }
-
         if (message.getActions() != null) {
             List<WebhookPayload.ActionItem> actions = new ArrayList<>();
             for (Action action : message.getActions()) {
@@ -216,15 +207,6 @@ public class WebhookService {
                     imageItem.setType(IMAGE);
                     imageItem.setUrl(section.getImageUrl());
                     body.add(imageItem);
-                }
-
-                if (section.getVideoUrl() != null) {
-                    WebhookPayload.BodyItem mediaItem = new WebhookPayload.BodyItem();
-                    mediaItem.setType(MEDIA);
-                    WebhookPayload.MediaSource source = new WebhookPayload.MediaSource();
-                    source.setUrl(section.getVideoUrl());
-                    mediaItem.setSources(Collections.singletonList(source));
-                    body.add(mediaItem);
                 }
             }
         }

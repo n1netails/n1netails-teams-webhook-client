@@ -75,14 +75,6 @@ public class Example {
 
             WebhookMessage message = new WebhookMessage();
             message.setContent("Hello, from n1netails-teams-webhook-client!");
-            message.setImageUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
-            // Gifs are also supported
-            // message.setImageUrl("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXh6cnVreHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKSjPQC1IdRWH1C/giphy.gif");
-            message.setVideoUrl("https://www.w3schools.com/html/mov_bbb.mp4");
-
-            List<Action> actions = new ArrayList<>();
-            actions.add(new Action("Visit Website", "https://github.com/n1netails/n1netails-teams-webhook-client"));
-            message.setActions(actions);
 
             client.sendMessage("YOUR_WEBHOOK_URL", message);
         } catch (Exception e) {
@@ -148,6 +140,67 @@ public class Example {
 <div align="center">
   <img src="teams-message-block.png" alt="N1netails teams webhook message block" width="500" style="display: block; margin: auto;"/>
 </div>
+
+### Image Message
+
+```java
+import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
+import com.n1netails.n1netails.teams.internal.TeamsWebhookClientImpl;
+import com.n1netails.n1netails.teams.model.WebhookMessage;
+import com.n1netails.n1netails.teams.service.WebhookService;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            WebhookService webhookService = new WebhookService();
+            TeamsWebhookClient client = new TeamsWebhookClientImpl(webhookService);
+
+            WebhookMessage message = new WebhookMessage();
+            message.setContent("Hello, from n1netails-teams-webhook-client!");
+            message.setImageUrl("https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png");
+
+            List<Action> actions = new ArrayList<>();
+            actions.add(new Action("Visit Website", "https://github.com/n1netails/n1netails-teams-webhook-client"));
+            message.setActions(actions);
+
+            client.sendMessage("YOUR_WEBHOOK_URL", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### GIF Message
+
+```java
+import com.n1netails.n1netails.teams.api.TeamsWebhookClient;
+import com.n1netails.n1netails.teams.internal.TeamsWebhookClientImpl;
+import com.n1netails.n1netails.teams.model.WebhookMessage;
+import com.n1netails.n1netails.teams.service.WebhookService;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            WebhookService webhookService = new WebhookService();
+            TeamsWebhookClient client = new TeamsWebhookClientImpl(webhookService);
+
+            WebhookMessage message = new WebhookMessage();
+            message.setContent("Hello, from n1netails-teams-webhook-client!");
+            // Gifs are also supported
+            message.setImageUrl("https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmEwajlsZjBqb2d2Zmk1bmJoYTEyN2Q0czRmOWtmYjd4YWVzMHoxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xsE65jaPsUKUo/giphy.gif");
+
+            List<Action> actions = new ArrayList<>();
+            actions.add(new Action("Visit Website", "https://github.com/n1netails/n1netails-teams-webhook-client"));
+            message.setActions(actions);
+
+            client.sendMessage("YOUR_WEBHOOK_URL", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 
 # Develop
