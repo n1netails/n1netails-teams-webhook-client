@@ -18,15 +18,54 @@ import java.util.List;
  */
 public class WebhookService {
 
+    /**
+     * Media type for Microsoft Adaptive Cards.
+     */
     public static final String APPLICATION_VND_MICROSOFT_CARD_ADAPTIVE = "application/vnd.microsoft.card.adaptive";
+
+    /**
+     * HTTP Adaptive card IO Schemas Adaptive card JSON
+     */
     public static final String HTTP_ADAPTIVECARDS_IO_SCHEMAS_ADAPTIVE_CARD_JSON = "http://adaptivecards.io/schemas/adaptive-card.json";
+
+    /**
+     * Adaptive Card schema URL.
+     */
     public static final String ADAPTIVE_CARD = "AdaptiveCard";
+
+    /**
+     * Content version
+     */
     public static final String VERSION = "1.4";
+
+    /**
+     * Text block
+     */
     public static final String TEXT_BLOCK = "TextBlock";
+
+    /**
+     * Bolder
+     */
     public static final String BOLDER = "Bolder";
+
+    /**
+     * Medium
+     */
     public static final String MEDIUM = "Medium";
+
+    /**
+     * Image
+     */
     public static final String IMAGE = "Image";
+
+    /**
+     * Media
+     */
     public static final String MEDIA = "Media";
+
+    /**
+     * Action Open URL.
+     */
     public static final String ACTION_OPEN_URL = "Action.OpenUrl";
 
     private final Gson gson = new Gson();
@@ -83,6 +122,11 @@ public class WebhookService {
         }
     }
 
+    /**
+     * Generates a webhook payload from a webhook message.
+     * @param message webhook message
+     * @return the webhook payload
+     */
     public static WebhookPayload getWebhookPayload(WebhookMessage message) {
         WebhookPayload payload = new WebhookPayload();
         WebhookPayload.Attachment attachment = new WebhookPayload.Attachment();
@@ -136,6 +180,12 @@ public class WebhookService {
         return content;
     }
 
+    /**
+     * Generates a webhook payload from a message card.
+     *
+     * @param card the message card
+     * @return the webhook payload
+     */
     public static WebhookPayload getWebhookPayload(MessageCard card) {
         WebhookPayload payload = new WebhookPayload();
 
