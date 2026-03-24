@@ -171,6 +171,11 @@ public class Example {
 }
 ```
 
+#### Example image message output
+<div align="center">
+  <img src="teams-message-image.png" alt="N1netails teams webhook message image" width="500" style="display: block; margin: auto;"/>
+</div>
+
 ### GIF Message
 
 ```java
@@ -201,6 +206,11 @@ public class Example {
     }
 }
 ```
+
+#### Example gif message output
+<div align="center">
+  <img src="teams-message-gif.png" alt="N1netails teams webhook message gif" width="500" style="display: block; margin: auto;"/>
+</div>
 
 
 # Develop
